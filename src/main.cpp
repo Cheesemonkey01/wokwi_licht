@@ -1,34 +1,32 @@
 #include <Arduino.h>
-#define N_PINS   5
-#define BAUDRATE 9600         //Anzahl der übertragenden Symbole in einer Sekunde
-#define T_ON     100
-#define T_OFF    400
-#define T_WAIT   3000
 
-      //Globale Variable
-      uint8_t pinLed[]={6, 7, 8, 9, 10};
+#define BAUDRATE 9600
 
-      // In einem Programm werden keine festen Werte innerhalb eines Codes verwendet!!!
+// Global Variables
+uint8_t pinLed[] = {5, 6, 7, 8, 9, 10};
 
+// Data from User
+uint8_t tones[] = {0, 1, 2, 3, 4, 4, 5, 5, 5, 5, 4, 5, 5, 5, 5, 4, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 0};
+float   tOn[] = {0.5, 0.5, 0.5, 0.5, 1.0, 1.0, 0.5, 0.5, 0.5, 0.5, 1.0, 0.5, 0.5, 0.5, 0.5, 1.0, 0.5, 0.5, 0.5, 0.5, 1.0, 1.0, 0.5, 0.5, 0.5, 0.5, 2.0};
+#define T_WAIT 3000
+#define N_TONES sizeof(tones) / sizeof(tones[0])
+#define N_PINS  sizeof(pinLed) / sizeof(pinLed[0])
 
-void setup()
-{     
-      Serial.begin(BAUDRATE);
-
-      //Set Pins as OUTPUT
-      for (uint8_t i = 0; i < N_PINS; ++i){
-            pinMode(pinLed[i], OUTPUT);
-      }
+void setup() {
+  Serial.begin(BAUDRATE);
+  // Set Pins as Output
+  for (uint8_t i = 0; i < N_PINS; i++) {
+     pinMode( pinLed[i], OUTPUT);
+  }
 }
 
-void loop()
-{   
+void loop() {
 
-    for (uint8_t i = 0; i <N_PINS; ++i){
-            digitalWrite(pinLed[i], HIGH);
-            delay(T_ON);
-            digitalWrite(pinLed[i], LOW);
-            delay(T_OFF);
-      }
-      delay(T_WAIT);
+  for (uint8_t i = 0; i < N_TONES; i++) {
+    uint8_t pinInPinlist = tones[i];
+    digitalWrite(pinLed[pinInPinlist], HIGH);
+    delay(tOn[i]*1000);
+    digitalWrite(pinLed[pinInPinlist], LOW);
+  }
+  delay(T_WAIT);
 }

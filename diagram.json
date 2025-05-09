@@ -78,6 +78,21 @@
       "left": 229.85,
       "rotate": 90,
       "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led6",
+      "top": -109.2,
+      "left": 272.6,
+      "attrs": { "color": "cyan" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r6",
+      "top": -4.8,
+      "left": 287.45,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
     }
   ],
   "connections": [
@@ -95,7 +110,10 @@
     [ "led5:C", "uno:GND.1", "green", [ "v172.8", "h-153.5" ] ],
     [ "led5:A", "r5:1", "green", [ "v0" ] ],
     [ "r5:2", "uno:10", "green", [ "h0" ] ],
-    [ "led2:C", "uno:GND.1", "green", [ "h-9.2", "v211.2" ] ]
+    [ "led2:C", "uno:GND.1", "green", [ "h-9.2", "v211.2" ] ],
+    [ "r6:1", "led6:A", "green", [ "h0" ] ],
+    [ "r6:2", "uno:5", "green", [ "h0" ] ],
+    [ "led6:C", "uno:GND.1", "green", [ "v182.4", "h-220.7" ] ]
   ],
   "dependencies": {}
 }
